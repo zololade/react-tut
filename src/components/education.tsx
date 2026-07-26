@@ -14,30 +14,30 @@ function Education({ btnVisibility, showBtn }: { btnVisibility: visibility; show
           show
         </button>
       </div>
-      <hr />
 
       {btnVisibility.edu ? (
         <>
+          <hr />
           <label htmlFor="school">School: </label>
-          <input type="text" id="school" placeholder="Enter School" />
+          <input type="text" id="school" name="school" placeholder="Enter School" />
 
           <label htmlFor="degree">Degree: </label>
-          <input type="text" id="degree" placeholder="Enter Degree" />
+          <input type="text" id="degree" name="degree" placeholder="Enter Degree" />
 
           <div className="date-group">
             <div className="date-item">
               <label htmlFor="start-date">Start Date: </label>
-              <input type="date" id="start-date" placeholder="Start Date" />
+              <input type="date" id="start-date" name="startDate" placeholder="Start Date" />
             </div>
 
             <div className="date-item">
               <label htmlFor="end-date">End Date: </label>
-              <input type="date" id="end-date" placeholder="End Date" />
+              <input type="date" id="end-date" name="endDate" placeholder="End Date" />
             </div>
           </div>
 
           <label htmlFor="location">Location: </label>
-          <input type="text" id="location" placeholder="Delicious, City"></input>
+          <input type="text" id="location" name="location" placeholder="Delicious, City"></input>
         </>
       ) : (
         ""

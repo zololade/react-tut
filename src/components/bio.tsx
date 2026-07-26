@@ -8,13 +8,34 @@ function Bio({ btnVisibility }: { btnVisibility: visibility }) {
       <hr />
 
       <label htmlFor="name">Name: </label>
-      <input type="text" id="name" autoComplete="name" required placeholder="First and Last name" />
+      <input
+        type="text"
+        id="name"
+        name="name"
+        autoComplete="name"
+        required
+        placeholder="First and Last name"
+      />
 
       <label htmlFor="email">Email: </label>
-      <input type="mail" id="email" autoComplete="email" required placeholder="Enter Email" />
+      <input
+        type="mail"
+        id="email"
+        name="email"
+        autoComplete="email"
+        required
+        placeholder="Enter Email"
+      />
 
       <label htmlFor="phone">Phone: </label>
-      <input type="tel" id="phone" autoComplete="phone" required placeholder="Enter Phone number" />
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        autoComplete="phone"
+        required
+        placeholder="Enter Phone number"
+      />
 
       <label htmlFor="address-line1">Street Address: </label>
       <input

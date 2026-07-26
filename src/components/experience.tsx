@@ -20,33 +20,33 @@ function Experience({
           show
         </button>
       </div>
-      <hr />
 
       {btnVisibility.exp ? (
         <>
+          <hr />
           <label htmlFor="company">Company Name: </label>
-          <input type="text" id="company" placeholder="Enter Company Name" />
+          <input type="text" id="company" name="company" placeholder="Enter Company Name" />
 
           <label htmlFor="position">Position Title: </label>
-          <input type="text" id="position" placeholder="Enter Position Title" />
+          <input type="text" id="position" name="position" placeholder="Enter Position Title" />
 
           <div className="date-group">
             <div className="date-item">
               <label htmlFor="start-date">Start Date: </label>
-              <input type="date" id="start-date" placeholder="Start Date" />
+              <input type="date" id="start-date" name="expStartDate" placeholder="Start Date" />
             </div>
 
             <div className="date-item">
               <label htmlFor="end-date">End Date: </label>
-              <input type="date" id="end-date" placeholder="End Date" />
+              <input type="date" id="end-date" name="expEndDate" placeholder="End Date" />
             </div>
           </div>
 
           <label htmlFor="location">Location: </label>
-          <input type="text" id="location" placeholder="Delicious, City"></input>
+          <input type="text" id="location" name="expLocation" placeholder="Delicious, City"></input>
 
           <label htmlFor="Description">Description: </label>
-          <textarea id="Description" placeholder="Enter Description"></textarea>
+          <textarea id="Description" name="expDesc" placeholder="Enter Description"></textarea>
         </>
       ) : (
         ""

@@ -7,7 +7,11 @@ import { Form } from "./components/form";
 export default function App() {
   function handleSubmit(e: React.SubmitEvent) {
     e.preventDefault();
-    console.log(e);
+
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+
+    console.log(data);
   }
 
   return (
