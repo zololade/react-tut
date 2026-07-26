@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import type { visibility } from "../types/types";
 import { SubmitBtn } from "./form";
 
@@ -10,10 +8,7 @@ function Education({
   btnVisibility: visibility;
   showBtn: (val: visibility) => void;
 }) {
-  const [show, setShow] = useState(false);
-
   function handleShow() {
-    setShow(!show);
     showBtn({ ...btnVisibility, edu: !btnVisibility.edu });
   }
 
@@ -27,7 +22,7 @@ function Education({
       </div>
       <hr />
 
-      {show ? (
+      {btnVisibility.edu ? (
         <>
           <label htmlFor="school">School: </label>
           <input type="text" id="school" placeholder="Enter School" />
@@ -54,7 +49,7 @@ function Education({
         ""
       )}
 
-      {btnVisibility.edu === true ? <SubmitBtn /> : ""}
+      {btnVisibility.edu && !btnVisibility.exp ? <SubmitBtn /> : ""}
     </fieldset>
   );
 }

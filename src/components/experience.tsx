@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import type { visibility } from "../types/types";
 import { SubmitBtn } from "./form";
 
@@ -10,10 +8,7 @@ function Experience({
   btnVisibility: visibility;
   showBtn: (val: visibility) => void;
 }) {
-  const [show, setShow] = useState(false);
-
   function handleShow() {
-    setShow(!show);
     showBtn({ ...btnVisibility, exp: !btnVisibility.exp });
   }
 
@@ -27,7 +22,7 @@ function Experience({
       </div>
       <hr />
 
-      {show ? (
+      {btnVisibility.exp ? (
         <>
           <label htmlFor="company">Company Name: </label>
           <input type="text" id="company" placeholder="Enter Company Name" />
@@ -57,7 +52,7 @@ function Experience({
         ""
       )}
 
-      {btnVisibility.exp === true ? <SubmitBtn /> : ""}
+      {btnVisibility.exp ? <SubmitBtn /> : ""}
     </fieldset>
   );
 }

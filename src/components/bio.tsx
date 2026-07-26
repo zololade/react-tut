@@ -26,7 +26,7 @@ function Bio({ btnVisibility }: { btnVisibility: visibility }) {
         placeholder="123 Main St"
       ></input>
 
-      {btnVisibility.edu === false && btnVisibility.exp === false ? <SubmitBtn /> : ""}
+      {!btnVisibility.edu && !btnVisibility.exp ? <SubmitBtn /> : ""}
     </fieldset>
   );
 }
