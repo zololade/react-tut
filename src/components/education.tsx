@@ -1,12 +1,20 @@
 import { useState } from "react";
 
+import type { visibility } from "../types/types";
 import { SubmitBtn } from "./form";
 
-function Education() {
+function Education({
+  btnVisibility,
+  showBtn,
+}: {
+  btnVisibility: visibility;
+  showBtn: (val: visibility) => void;
+}) {
   const [show, setShow] = useState(false);
 
   function handleShow() {
     setShow(!show);
+    showBtn({ ...btnVisibility, edu: !btnVisibility.edu });
   }
 
   return (
@@ -41,14 +49,12 @@ function Education() {
 
           <label htmlFor="location">Location: </label>
           <input type="text" id="location" placeholder="Delicious, City"></input>
-
-          <button type="submit">Submit</button>
         </>
       ) : (
         ""
       )}
 
-      <SubmitBtn />
+      {btnVisibility.edu === true ? <SubmitBtn /> : ""}
     </fieldset>
   );
 }
