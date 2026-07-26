@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { SubmitBtn } from "./form";
 
-function Education() {
+function Experience() {
   const [show, setShow] = useState(false);
 
   function handleShow() {
@@ -10,9 +10,9 @@ function Education() {
   }
 
   return (
-    <fieldset className="edu" aria-labelledby="education-heading">
+    <fieldset className="exp" aria-labelledby="experience-heading">
       <div className="header-group">
-        <h2 id="education-heading">Education</h2>
+        <h2 id="experience-heading">Experience</h2>
         <button type="button" onClick={handleShow}>
           show
         </button>
@@ -21,11 +21,11 @@ function Education() {
 
       {show ? (
         <>
-          <label htmlFor="school">School: </label>
-          <input type="text" id="school" placeholder="Enter School" />
+          <label htmlFor="company">Company Name: </label>
+          <input type="text" id="company" placeholder="Enter Company Name" />
 
-          <label htmlFor="degree">Degree: </label>
-          <input type="text" id="degree" placeholder="Enter Degree" />
+          <label htmlFor="position">Position Title: </label>
+          <input type="text" id="position" placeholder="Enter Position Title" />
 
           <div className="date-group">
             <div className="date-item">
@@ -42,7 +42,8 @@ function Education() {
           <label htmlFor="location">Location: </label>
           <input type="text" id="location" placeholder="Delicious, City"></input>
 
-          <button type="submit">Submit</button>
+          <label htmlFor="Description">Description: </label>
+          <textarea id="Description" placeholder="Enter Description"></textarea>
         </>
       ) : (
         ""
@@ -53,4 +54,4 @@ function Education() {
   );
 }
 
-export { Education };
+export { Experience };

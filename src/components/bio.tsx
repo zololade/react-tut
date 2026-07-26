@@ -1,3 +1,5 @@
+import { SubmitBtn } from "./form";
+
 function Bio() {
   return (
     <fieldset className="bio" aria-labelledby="contact-heading">
@@ -22,6 +24,8 @@ function Bio() {
         required
         placeholder="123 Main St"
       ></input>
+
+      <SubmitBtn />
     </fieldset>
   );
 }
