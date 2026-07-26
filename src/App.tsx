@@ -1,9 +1,12 @@
-function App() {
+// import { useState, useEffect } from "react";
+
+import "./styles.css";
+import { Form } from "./components/form";
+
+export default function App() {
   return (
     <>
-      <h1>hello world</h1>
+      <Form />
     </>
   );
 }
-
-export default App;
