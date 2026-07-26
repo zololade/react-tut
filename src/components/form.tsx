@@ -19,8 +19,14 @@ function Form({ handleSubmit }: FormProp) {
   return (
     <form action="#" onSubmit={handleSubmit}>
       <Bio btnVisibility={submitVisibility} />
-      <Education btnVisibility={submitVisibility} showBtn={updateVisibility} />
-      <Experience btnVisibility={submitVisibility} showBtn={updateVisibility} />
+      <Education
+        btnVisibility={submitVisibility}
+        showBtn={() => updateVisibility({ ...submitVisibility, edu: !submitVisibility.edu })}
+      />
+      <Experience
+        btnVisibility={submitVisibility}
+        showBtn={() => updateVisibility({ ...submitVisibility, exp: !submitVisibility.exp })}
+      />
     </form>
   );
 }

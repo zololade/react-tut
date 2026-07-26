@@ -6,10 +6,10 @@ function Experience({
   showBtn,
 }: {
   btnVisibility: visibility;
-  showBtn: (val: visibility) => void;
+  showBtn: () => void;
 }) {
   function handleShow() {
-    showBtn({ ...btnVisibility, exp: !btnVisibility.exp });
+    showBtn();
   }
 
   return (

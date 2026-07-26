@@ -1,15 +1,9 @@
 import type { visibility } from "../types/types";
 import { SubmitBtn } from "./form";
 
-function Education({
-  btnVisibility,
-  showBtn,
-}: {
-  btnVisibility: visibility;
-  showBtn: (val: visibility) => void;
-}) {
+function Education({ btnVisibility, showBtn }: { btnVisibility: visibility; showBtn: () => void }) {
   function handleShow() {
-    showBtn({ ...btnVisibility, edu: !btnVisibility.edu });
+    showBtn();
   }
 
   return (
