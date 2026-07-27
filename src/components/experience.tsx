@@ -1,5 +1,5 @@
 import type { visibility } from "../types/types";
-import { SubmitBtn } from "./form";
+import { DropDownBtn, SubmitBtn } from "./form";
 
 function Experience({
   btnVisibility,
@@ -8,17 +8,11 @@ function Experience({
   btnVisibility: visibility;
   showBtn: () => void;
 }) {
-  function handleShow() {
-    showBtn();
-  }
-
   return (
     <fieldset className="exp" aria-labelledby="experience-heading">
       <div className="header-group">
         <h2 id="experience-heading">Experience</h2>
-        <button type="button" onClick={handleShow}>
-          show
-        </button>
+        <DropDownBtn showBtn={showBtn} />
       </div>
 
       {btnVisibility.exp ? (

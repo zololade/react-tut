@@ -1,18 +1,12 @@
 import type { visibility } from "../types/types";
-import { SubmitBtn } from "./form";
+import { DropDownBtn, SubmitBtn } from "./form";
 
 function Education({ btnVisibility, showBtn }: { btnVisibility: visibility; showBtn: () => void }) {
-  function handleShow() {
-    showBtn();
-  }
-
   return (
     <fieldset className="edu" aria-labelledby="education-heading">
       <div className="header-group">
         <h2 id="education-heading">Education</h2>
-        <button type="button" onClick={handleShow}>
-          show
-        </button>
+        <DropDownBtn showBtn={showBtn} />
       </div>
 
       {btnVisibility.edu ? (
