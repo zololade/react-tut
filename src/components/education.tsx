@@ -1,7 +1,7 @@
 import type { visibility } from "../types/types";
-import { DropDownBtn, SubmitBtn } from "./form";
+import { DropDownBtn } from "./form";
 
-function Education({ btnVisibility, showBtn }: { btnVisibility: visibility; showBtn: () => void }) {
+function Education({ visibility, showBtn }: { visibility: visibility; showBtn: () => void }) {
   return (
     <fieldset className="edu" aria-labelledby="education-heading">
       <div className="header-group">
@@ -9,7 +9,7 @@ function Education({ btnVisibility, showBtn }: { btnVisibility: visibility; show
         <DropDownBtn showBtn={showBtn} />
       </div>
 
-      {btnVisibility.edu ? (
+      {visibility.edu ? (
         <>
           <hr />
           <label htmlFor="school">School: </label>
@@ -36,8 +36,6 @@ function Education({ btnVisibility, showBtn }: { btnVisibility: visibility; show
       ) : (
         ""
       )}
-
-      {btnVisibility.edu && !btnVisibility.exp ? <SubmitBtn /> : ""}
     </fieldset>
   );
 }

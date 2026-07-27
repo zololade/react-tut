@@ -1,7 +1,4 @@
-import type { visibility } from "../types/types";
-import { SubmitBtn } from "./form";
-
-function Bio({ btnVisibility }: { btnVisibility: visibility }) {
+function Bio() {
   return (
     <fieldset className="bio" aria-labelledby="contact-heading">
       <h2 id="contact-heading">Personal details</h2>
@@ -46,8 +43,6 @@ function Bio({ btnVisibility }: { btnVisibility: visibility }) {
         required
         placeholder="123 Main St"
       ></input>
-
-      {!btnVisibility.edu && !btnVisibility.exp ? <SubmitBtn /> : ""}
     </fieldset>
   );
 }

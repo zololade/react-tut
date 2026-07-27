@@ -1,13 +1,7 @@
 import type { visibility } from "../types/types";
-import { DropDownBtn, SubmitBtn } from "./form";
+import { DropDownBtn } from "./form";
 
-function Experience({
-  btnVisibility,
-  showBtn,
-}: {
-  btnVisibility: visibility;
-  showBtn: () => void;
-}) {
+function Experience({ visibility, showBtn }: { visibility: visibility; showBtn: () => void }) {
   return (
     <fieldset className="exp" aria-labelledby="experience-heading">
       <div className="header-group">
@@ -15,7 +9,7 @@ function Experience({
         <DropDownBtn showBtn={showBtn} />
       </div>
 
-      {btnVisibility.exp ? (
+      {visibility.exp ? (
         <>
           <hr />
           <label htmlFor="company">Company Name: </label>
@@ -45,8 +39,6 @@ function Experience({
       ) : (
         ""
       )}
-
-      {btnVisibility.exp ? <SubmitBtn /> : ""}
     </fieldset>
   );
 }

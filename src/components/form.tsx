@@ -24,23 +24,25 @@ function DropDownBtn({ showBtn }: { showBtn: () => void }) {
 }
 
 function Form({ handleSubmit }: FormProp) {
-  const [submitVisibility, setSubmitVisibility] = useState<visibility>({ edu: false, exp: false });
+  const [visibility, setVisibility] = useState<visibility>({ edu: false, exp: false });
 
   function updateVisibility(val: visibility) {
-    setSubmitVisibility(val);
+    setVisibility(val);
   }
 
   return (
     <form action="#" onSubmit={handleSubmit}>
-      <Bio btnVisibility={submitVisibility} />
+      <Bio />
       <Education
-        btnVisibility={submitVisibility}
-        showBtn={() => updateVisibility({ ...submitVisibility, edu: !submitVisibility.edu })}
+        visibility={visibility}
+        showBtn={() => updateVisibility({ ...visibility, edu: !visibility.edu })}
       />
       <Experience
-        btnVisibility={submitVisibility}
-        showBtn={() => updateVisibility({ ...submitVisibility, exp: !submitVisibility.exp })}
+        visibility={visibility}
+        showBtn={() => updateVisibility({ ...visibility, exp: !visibility.exp })}
       />
+
+      <SubmitBtn />
     </form>
   );
 }
