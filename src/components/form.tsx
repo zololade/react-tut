@@ -42,7 +42,7 @@ function Form({ handleSubmit }: FormProp) {
         showBtn={() => updateVisibility({ ...visibility, exp: !visibility.exp })}
       />
 
-      {/* <SubmitBtn /> */}
+      <SubmitBtn />
     </form>
   );
 }

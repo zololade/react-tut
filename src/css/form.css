@@ -1,0 +1,73 @@
+#root {
+  form {
+    fieldset {
+      background-color: var(--bg-color);
+      width: 400px;
+      margin: auto;
+      box-shadow: 0px 0px 5px 2px var(--box-shadow);
+      padding: 1rem;
+      border-radius: 5px;
+      &:not(:first-of-type) {
+        margin-top: 1.5rem;
+      }
+
+      input,
+      hr,
+      label,
+      textarea {
+        display: block;
+        margin-top: 0.5rem;
+      }
+
+      input,
+      textarea {
+        border: none;
+        background-color: var(--input-bg);
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        width: 100%;
+      }
+
+      hr {
+        border: none;
+        border-bottom: 1px solid #80808038;
+      }
+      .date-group,
+      .header-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        .date-item {
+          flex: 1;
+        }
+      }
+    }
+
+    /* btn */
+    button {
+      padding: 0.5rem;
+      background: none;
+      border: 1px solid gray;
+      border-radius: 5px;
+      font-weight: 600;
+
+      &[type="submit"] {
+        color: white;
+        border: 1px solid var(--bg-color);
+        background-color: #187ff5;
+        margin-top: 1rem;
+      }
+
+      &.dropBtn {
+        padding: 0;
+        border: 0px solid transparent;
+        transition: all 200ms ease-in-out;
+
+        &.active {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}

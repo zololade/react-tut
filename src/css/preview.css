@@ -1,0 +1,11 @@
+#root {
+  .preview {
+    flex: auto;
+    background-color: var(--bg-color);
+    box-shadow: 0px 0px 5px 2px var(--box-shadow);
+    padding: 1rem;
+    max-width: 700px;
+    height: calc(100vh - 2rem);
+    height: calc(100dvh - 2rem);
+  }
+}
