@@ -23,7 +23,7 @@ function DropDownBtn({ showBtn }: { showBtn: () => void }) {
   );
 }
 
-function Form({ handleSubmit }: FormProp) {
+function Form({ handleSubmit, formStateMod }: FormProp) {
   const [visibility, setVisibility] = useState<visibility>({ edu: false, exp: false });
 
   function updateVisibility(val: visibility) {
@@ -32,7 +32,7 @@ function Form({ handleSubmit }: FormProp) {
 
   return (
     <form action="#" onSubmit={handleSubmit}>
-      <Bio />
+      <Bio formStateMod={formStateMod} />
       <Education
         visibility={visibility}
         showBtn={() => updateVisibility({ ...visibility, edu: !visibility.edu })}

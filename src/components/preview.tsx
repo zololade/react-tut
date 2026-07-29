@@ -1,7 +1,9 @@
-function Preview() {
+import type { FormProp } from "../types/types";
+
+function Preview({ formState }: Pick<FormProp, "formState">) {
   return (
     <section className="preview">
-      <h1>stuff</h1>
+      <h1>{formState.name}</h1>
     </section>
   );
 }

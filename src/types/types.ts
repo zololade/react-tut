@@ -1,8 +1,8 @@
-import type { Dispatch, SetStateAction, SubmitEventHandler } from "react";
+import type { SubmitEventHandler, ChangeEvent } from "react";
 
 interface FormProp {
   formState: State;
-  formStateMod: Dispatch<SetStateAction<State>>;
+  formStateMod: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: SubmitEventHandler;
 }
 type visibility = { exp: boolean; edu: boolean };

@@ -1,4 +1,6 @@
-function Bio() {
+import type { FormProp } from "../types/types";
+
+function Bio({ formStateMod }: Pick<FormProp, "formStateMod">) {
   return (
     <fieldset className="bio" aria-labelledby="contact-heading">
       <h2 id="contact-heading">Personal details</h2>
@@ -12,6 +14,7 @@ function Bio() {
         autoComplete="name"
         required
         placeholder="First and Last name"
+        onChange={formStateMod}
       />
 
       <label htmlFor="email">Email: </label>

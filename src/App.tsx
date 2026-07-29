@@ -1,8 +1,7 @@
 // import { useState, useEffect } from "react";
-import type React from "react";
 
 import "./styles.css";
-import { useState } from "react";
+import { useState, type ChangeEvent, type SubmitEvent } from "react";
 
 import { Form } from "./components/form";
 import { Preview } from "./components/preview";
@@ -27,7 +26,16 @@ export default function App() {
     expDesc: "",
   });
 
-  function handleSubmit(e: React.SubmitEvent) {
+  function formStateMod(e: ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  }
+
+  function handleSubmit(e: SubmitEvent) {
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -38,8 +46,8 @@ export default function App() {
 
   return (
     <>
-      <Form handleSubmit={handleSubmit} formState={formState} formStateMod={setFormState} />
-      <Preview />
+      <Form handleSubmit={handleSubmit} formState={formState} formStateMod={formStateMod} />
+      <Preview formState={formState} />
     </>
   );
 }
