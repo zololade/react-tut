@@ -1,6 +1,6 @@
 import type { FormField } from "../types/types";
 
-// 2. Create the fields array outside the component to prevent re-creation on render
+// Create the fields array outside the component to prevent re-creation on render
 const BIO_FIELDS: FormField[] = [
   {
     id: "name",
@@ -17,7 +17,7 @@ const BIO_FIELDS: FormField[] = [
     type: "email",
     autoComplete: "email",
     placeholder: "Enter Email",
-  }, // Fixed type from "mail" to "email"
+  },
   {
     id: "phone",
     name: "phone",

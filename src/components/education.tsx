@@ -8,10 +8,10 @@ function Education({ visibility, showBtn, formStateMod }: UserData) {
         <h2 id="education-heading">Education</h2>
         <DropDownBtn showBtn={showBtn} />
       </div>
+      <hr />
 
       {visibility.edu ? (
         <>
-          <hr />
           <label htmlFor="school">School: </label>
           <input
             type="text"

@@ -8,10 +8,10 @@ function Experience({ visibility, showBtn, formStateMod }: UserData) {
         <h2 id="experience-heading">Experience</h2>
         <DropDownBtn showBtn={showBtn} />
       </div>
+      <hr />
 
       {visibility.exp ? (
         <>
-          <hr />
           <label htmlFor="company">Company Name: </label>
           <input
             type="text"
