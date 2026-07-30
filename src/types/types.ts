@@ -1,5 +1,22 @@
 import type { SubmitEventHandler, ChangeEvent, ReactNode } from "react";
 
+type FormFields =
+  | "name"
+  | "email"
+  | "phone"
+  | "address_line1"
+  | "school"
+  | "degree"
+  | "startDate"
+  | "endDate"
+  | "location"
+  | "company"
+  | "position"
+  | "expStartDate"
+  | "expEndDate"
+  | "expLocation"
+  | "expDesc";
+
 interface FormProp {
   handleSubmit: SubmitEventHandler;
   children: ReactNode;
@@ -14,22 +31,6 @@ interface UserData {
 type Visibility = { exp: boolean; edu: boolean };
 type ChangeType = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
-type State = {
-  name: string;
-  email: string;
-  phone: string;
-  address_line1: string;
-  school: string;
-  degree: string;
-  startDate: string;
-  endDate: string;
-  location: string;
-  company: string;
-  position: string;
-  expStartDate: string;
-  expEndDate: string;
-  expLocation: string;
-  expDesc: string;
-};
+type State = { [k in FormFields]: string };
 
 export type { FormProp, UserData, Visibility, State, ChangeType };

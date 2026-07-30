@@ -24,10 +24,8 @@ export default function App() {
 
   function handleSubmit(e: SubmitEvent) {
     e.preventDefault();
-
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-
     console.log(data);
   }
 
