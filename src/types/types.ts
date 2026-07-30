@@ -33,4 +33,14 @@ type ChangeType = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 type State = { [k in FormFields]: string };
 
-export type { FormProp, UserData, Visibility, State, ChangeType };
+//form stuff
+interface FormField {
+  id: string;
+  name: string;
+  label: string;
+  type: string;
+  autoComplete: string;
+  placeholder: string;
+}
+
+export type { FormProp, UserData, Visibility, State, ChangeType, FormField };
