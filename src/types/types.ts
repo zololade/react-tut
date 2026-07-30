@@ -1,11 +1,18 @@
-import type { SubmitEventHandler, ChangeEvent } from "react";
+import type { SubmitEventHandler, ChangeEvent, ReactNode } from "react";
 
 interface FormProp {
-  formState: State;
-  formStateMod: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: SubmitEventHandler;
+  children: ReactNode;
 }
-type visibility = { exp: boolean; edu: boolean };
+
+interface UserData {
+  formStateMod: (e: ChangeType) => void;
+  visibility: Visibility;
+  showBtn: () => void;
+}
+
+type Visibility = { exp: boolean; edu: boolean };
+type ChangeType = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 type State = {
   name: string;
@@ -25,4 +32,4 @@ type State = {
   expDesc: string;
 };
 
-export type { FormProp, visibility, State };
+export type { FormProp, UserData, Visibility, State, ChangeType };

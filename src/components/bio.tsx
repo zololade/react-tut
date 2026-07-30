@@ -1,6 +1,6 @@
-import type { FormProp } from "../types/types";
+import type { UserData } from "../types/types";
 
-function Bio({ formStateMod }: Pick<FormProp, "formStateMod">) {
+function Bio({ formStateMod }: Pick<UserData, "formStateMod">) {
   return (
     <fieldset className="bio" aria-labelledby="contact-heading">
       <h2 id="contact-heading">Personal details</h2>
@@ -25,6 +25,7 @@ function Bio({ formStateMod }: Pick<FormProp, "formStateMod">) {
         autoComplete="email"
         required
         placeholder="Enter Email"
+        onChange={formStateMod}
       />
 
       <label htmlFor="phone">Phone: </label>
@@ -35,6 +36,7 @@ function Bio({ formStateMod }: Pick<FormProp, "formStateMod">) {
         autoComplete="phone"
         required
         placeholder="Enter Phone number"
+        onChange={formStateMod}
       />
 
       <label htmlFor="address-line1">Street Address: </label>
@@ -45,7 +47,8 @@ function Bio({ formStateMod }: Pick<FormProp, "formStateMod">) {
         autoComplete="address-line1"
         required
         placeholder="123 Main St"
-      ></input>
+        onChange={formStateMod}
+      />
     </fieldset>
   );
 }

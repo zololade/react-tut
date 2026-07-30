@@ -1,13 +1,6 @@
 import { useState } from "react";
 
-import type { FormProp, visibility } from "../types/types";
-import { Bio } from "./bio";
-import { Education } from "./education";
-import { Experience } from "./experience";
-
-function SubmitBtn() {
-  return <button type="submit">Submit</button>;
-}
+import type { FormProp } from "../types/types";
 
 function DropDownBtn({ showBtn }: { showBtn: () => void }) {
   const [rotate, setRotate] = useState(false);
@@ -23,28 +16,12 @@ function DropDownBtn({ showBtn }: { showBtn: () => void }) {
   );
 }
 
-function Form({ handleSubmit, formStateMod }: FormProp) {
-  const [visibility, setVisibility] = useState<visibility>({ edu: false, exp: false });
-
-  function updateVisibility(val: visibility) {
-    setVisibility(val);
-  }
-
+function Form({ handleSubmit, children }: FormProp) {
   return (
     <form action="#" onSubmit={handleSubmit}>
-      <Bio formStateMod={formStateMod} />
-      <Education
-        visibility={visibility}
-        showBtn={() => updateVisibility({ ...visibility, edu: !visibility.edu })}
-      />
-      <Experience
-        visibility={visibility}
-        showBtn={() => updateVisibility({ ...visibility, exp: !visibility.exp })}
-      />
-
-      <SubmitBtn />
+      <>{children}</>
     </form>
   );
 }
 
-export { Form, SubmitBtn, DropDownBtn };
+export { Form, DropDownBtn };

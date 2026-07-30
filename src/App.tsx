@@ -1,34 +1,21 @@
-// import { useState, useEffect } from "react";
-
 import "./styles.css";
-import { useState, type ChangeEvent, type SubmitEvent } from "react";
+import { useState, type SubmitEvent } from "react";
 
+import { Bio } from "./components/bio";
+import { Education } from "./components/education";
+import { Experience } from "./components/experience";
 import { Form } from "./components/form";
 import { Preview } from "./components/preview";
-import type { State } from "./types/types";
+import { SubmitBtn } from "./components/submitBtn";
+import { initialData } from "./data/userData";
+import type { ChangeType, State, Visibility } from "./types/types";
 
 export default function App() {
-  const [formState, setFormState] = useState<State>({
-    name: "",
-    email: "",
-    phone: "",
-    address_line1: "",
-    school: "",
-    degree: "",
-    startDate: "",
-    endDate: "",
-    location: "",
-    company: "",
-    position: "",
-    expStartDate: "",
-    expEndDate: "",
-    expLocation: "",
-    expDesc: "",
-  });
+  const [visibility, setVisibility] = useState<Visibility>({ edu: false, exp: false });
+  const [formState, setFormState] = useState<State>(initialData);
 
-  function formStateMod(e: ChangeEvent<HTMLInputElement>) {
+  function formStateMod(e: ChangeType) {
     const { name, value } = e.target;
-
     setFormState({
       ...formState,
       [name]: value,
@@ -44,9 +31,26 @@ export default function App() {
     console.log(data);
   }
 
+  function updateVisibility(val: Visibility) {
+    setVisibility(val);
+  }
+
   return (
     <>
-      <Form handleSubmit={handleSubmit} formState={formState} formStateMod={formStateMod} />
+      <Form handleSubmit={handleSubmit}>
+        <Bio formStateMod={formStateMod} />
+        <Education
+          visibility={visibility}
+          showBtn={() => updateVisibility({ ...visibility, edu: !visibility.edu })}
+          formStateMod={formStateMod}
+        />
+        <Experience
+          visibility={visibility}
+          showBtn={() => updateVisibility({ ...visibility, exp: !visibility.exp })}
+          formStateMod={formStateMod}
+        />
+        <SubmitBtn />
+      </Form>
       <Preview formState={formState} />
     </>
   );
