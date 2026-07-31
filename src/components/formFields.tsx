@@ -19,7 +19,7 @@ function FormFields({ fields, formStateMod }: FieldProp) {
             name={field.name}
             autoComplete={field.autoComplete ? field.autoComplete : "off"}
             placeholder={field.placeholder}
-            required={field.required ? true : false}
+            required={field.required}
             onChange={formStateMod}
           />
         </div>
