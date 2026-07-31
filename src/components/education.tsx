@@ -22,7 +22,6 @@ function Education({ visibility, showBtn, formStateMod }: UserData) {
                 type={field.type}
                 id={field.id}
                 name={field.name}
-                required
                 placeholder={field.placeholder}
                 onChange={formStateMod}
               />
