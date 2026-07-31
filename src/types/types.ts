@@ -34,7 +34,7 @@ type ChangeType = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 type State = { [k in FormFields]: string };
 
 //form stuff
-interface FormField {
+interface FormConfig {
   id: string;
   name: string;
   label: string;
@@ -43,4 +43,6 @@ interface FormField {
   placeholder: string;
 }
 
-export type { FormProp, UserData, Visibility, State, ChangeType, FormField };
+type FormSection = Omit<FormConfig, "autoComplete">;
+
+export type { FormProp, UserData, Visibility, State, ChangeType, FormConfig, FormSection };

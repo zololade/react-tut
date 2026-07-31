@@ -1,7 +1,7 @@
-import type { FormField } from "../types/types";
+import type { FormConfig } from "../types/types";
 
 // Create the fields array outside the component to prevent re-creation on render
-const BIO_FIELDS: FormField[] = [
+const BIO_FIELDS: FormConfig[] = [
   {
     id: "name",
     name: "name",
