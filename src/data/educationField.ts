@@ -22,6 +22,7 @@ const EDU_FIELDS: FormConfig[] = [
     label: "Start Date: ",
     type: "date",
     placeholder: "Start Date",
+    halfWidth: true,
   },
   {
     id: "end-date",
@@ -29,6 +30,7 @@ const EDU_FIELDS: FormConfig[] = [
     label: "End Date: ",
     type: "date",
     placeholder: "End Date",
+    halfWidth: true,
   },
   {
     id: "location",

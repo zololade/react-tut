@@ -42,6 +42,7 @@ interface FormConfig {
   autoComplete?: string;
   placeholder: string;
   required?: boolean;
+  halfWidth?: boolean;
 }
 
 export type { FormProp, UserData, Visibility, State, ChangeType, FormConfig };

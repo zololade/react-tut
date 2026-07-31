@@ -1,4 +1,4 @@
-import { Fragment } from "react/jsx-runtime";
+// import { Fragment } from "react/jsx-runtime";
 
 import type { FormConfig, UserData } from "../types/types";
 type FieldProp = {
@@ -11,7 +11,7 @@ function FormFields({ fields, formStateMod }: FieldProp) {
     <>
       {/* Loop through the array to generate labels and inputs dynamically */}
       {fields.map((field) => (
-        <Fragment key={field.id}>
+        <div key={field.id} className={`field-item ${field.halfWidth ? "half-width" : ""}`}>
           <label htmlFor={field.id}>{field.label}</label>
           <input
             type={field.type}
@@ -22,7 +22,7 @@ function FormFields({ fields, formStateMod }: FieldProp) {
             required={field.required ? true : false}
             onChange={formStateMod}
           />
-        </Fragment>
+        </div>
       ))}
     </>
   );
