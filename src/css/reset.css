@@ -5,6 +5,8 @@
   &:not(textarea) {
     scrollbar-gutter: stable both-edges;
   }
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 legend,
 fieldset {

@@ -1,8 +1,7 @@
-import { Fragment } from "react/jsx-runtime";
-
 import { EXP_FIELDS } from "../data/experienceField";
 import type { UserData } from "../types/types";
 import { DropDownBtn } from "./form";
+import { FormFields } from "./formFields";
 
 function Experience({ visibility, showBtn, formStateMod }: UserData) {
   return (
@@ -11,24 +10,11 @@ function Experience({ visibility, showBtn, formStateMod }: UserData) {
         <h2 id="experience-heading">Experience</h2>
         <DropDownBtn showBtn={showBtn} />
       </div>
-      <hr />
 
       {visibility.exp ? (
         <>
-          {EXP_FIELDS.map((field) => (
-            <Fragment key={field.id}>
-              <label htmlFor={field.id}>{field.label}</label>
-              <input
-                type={field.type}
-                id={field.id}
-                name={field.name}
-                placeholder={field.placeholder}
-                required={field.required ? true : false}
-                onChange={formStateMod}
-              />
-            </Fragment>
-          ))}
-
+          <hr />
+          <FormFields fields={EXP_FIELDS} formStateMod={formStateMod} />
           <label htmlFor="Description">Description: </label>
           <textarea
             id="Description"

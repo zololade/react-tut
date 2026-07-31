@@ -39,11 +39,9 @@ interface FormConfig {
   name: string;
   label: string;
   type: string;
-  autoComplete: string;
+  autoComplete?: string;
   placeholder: string;
   required?: boolean;
 }
 
-type FormSection = Omit<FormConfig, "autoComplete">;
-
-export type { FormProp, UserData, Visibility, State, ChangeType, FormConfig, FormSection };
+export type { FormProp, UserData, Visibility, State, ChangeType, FormConfig };

@@ -1,7 +1,7 @@
-import type { FormSection } from "../types/types";
+import type { FormConfig } from "../types/types";
 
 // Create the fields array outside the component to prevent re-creation on render
-const EXP_FIELDS: FormSection[] = [
+const EXP_FIELDS: FormConfig[] = [
   {
     id: "company",
     name: "company",

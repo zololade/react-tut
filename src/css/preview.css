@@ -1,4 +1,5 @@
 #root {
+  position: relative;
   .preview {
     flex: auto;
     background-color: var(--bg-color);
