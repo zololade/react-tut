@@ -41,6 +41,7 @@ interface FormConfig {
   type: string;
   autoComplete: string;
   placeholder: string;
+  required?: boolean;
 }
 
 type FormSection = Omit<FormConfig, "autoComplete">;

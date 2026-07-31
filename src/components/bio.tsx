@@ -18,8 +18,8 @@ function Bio({ formStateMod }: Pick<UserData, "formStateMod">) {
             id={field.id}
             name={field.name}
             autoComplete={field.autoComplete}
-            required
             placeholder={field.placeholder}
+            required={field.required ? true : false}
             onChange={formStateMod}
           />
         </Fragment>

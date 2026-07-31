@@ -23,6 +23,7 @@ function Education({ visibility, showBtn, formStateMod }: UserData) {
                 id={field.id}
                 name={field.name}
                 placeholder={field.placeholder}
+                required={field.required ? true : false}
                 onChange={formStateMod}
               />
             </Fragment>

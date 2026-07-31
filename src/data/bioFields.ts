@@ -9,6 +9,7 @@ const BIO_FIELDS: FormConfig[] = [
     type: "text",
     autoComplete: "name",
     placeholder: "First and Last name",
+    required: true,
   },
   {
     id: "email",
@@ -17,6 +18,7 @@ const BIO_FIELDS: FormConfig[] = [
     type: "email",
     autoComplete: "email",
     placeholder: "Enter Email",
+    required: true,
   },
   {
     id: "phone",
@@ -25,6 +27,7 @@ const BIO_FIELDS: FormConfig[] = [
     type: "tel",
     autoComplete: "phone",
     placeholder: "Enter Phone number",
+    required: true,
   },
   {
     id: "address-line1",
@@ -33,6 +36,7 @@ const BIO_FIELDS: FormConfig[] = [
     type: "text",
     autoComplete: "address-line1",
     placeholder: "123 Main St",
+    required: true,
   },
 ];
 
