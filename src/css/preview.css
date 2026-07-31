@@ -1,12 +1,140 @@
 #root {
-  position: relative;
+  .preview-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    max-width: 800px;
+  }
+
   .preview {
     flex: auto;
-    background-color: var(--bg-color);
-    box-shadow: 0px 0px 5px 2px var(--box-shadow);
+
     padding: 1rem;
     max-width: 700px;
     height: calc(100vh - 2rem);
     height: calc(100dvh - 2rem);
+  }
+
+  .cv-paper {
+    width: 100%;
+    min-height: 1000px;
+    padding: 2.5rem;
+    background-color: #ffffff;
+    color: #2b2d42;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    /* Header styling */
+    .cv-header {
+      border-bottom: 2px solid #2b2d42;
+      padding-bottom: 1rem;
+
+      .cv-name {
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        color: #1a1a2e;
+        text-transform: capitalize;
+      }
+
+      .cv-title {
+        font-size: 1.1rem;
+        color: #4a4e69;
+        margin-top: 0.25rem;
+        font-weight: 500;
+      }
+    }
+
+    /* Two-column layout */
+    .cv-body {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 2rem;
+
+      .cv-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        border-right: 1px solid #e0e0e0;
+        padding-right: 1.5rem;
+      }
+
+      .cv-main {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+    }
+
+    /* Shared Section & Entry Typography */
+    .cv-section {
+      .cv-section-title {
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #0066cc;
+        border-bottom: 1px solid #0066cc22;
+        padding-bottom: 0.25rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .cv-entry {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        .cv-entry-title {
+          font-size: 1rem;
+          font-weight: 600;
+          color: #1a1a2e;
+        }
+
+        .cv-company,
+        .cv-institution {
+          font-size: 0.9rem;
+          color: #333333;
+        }
+
+        .cv-dates,
+        .cv-location {
+          font-size: 0.8rem;
+          color: #6c757d;
+        }
+
+        .cv-description {
+          font-size: 0.875rem;
+          line-height: 1.5;
+          margin-top: 0.5rem;
+          color: #333333;
+          white-space: pre-line;
+        }
+
+        .cv-entry-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+        }
+      }
+    }
+
+    /* Contact Address formatting */
+    .cv-contact-info {
+      font-style: normal;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+
+      .cv-contact-item {
+        word-break: break-word;
+        .label {
+          font-weight: 600;
+          color: #4a4e69;
+        }
+      }
+    }
   }
 }
