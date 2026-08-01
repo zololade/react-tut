@@ -5,19 +5,18 @@
   fieldset {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: clamp(0.75rem, 2vw, 1rem);
     width: 100%;
     margin: auto;
-    padding: 1.5rem;
+    padding: clamp(1rem, 3vw, 1.5rem);
     background-color: var(--bg-color);
     box-shadow: 0 4px 10px var(--box-shadow);
     border-radius: 8px;
 
     &:not(:first-of-type) {
-      margin-top: 1.5rem;
+      margin-top: clamp(1rem, 3vw, 1.5rem);
     }
 
-    /* Tablet/Desktop Grid Override */
     @media (min-width: 600px) {
       grid-template-columns: repeat(2, 1fr);
       gap: 1.25rem 1rem;
@@ -33,6 +32,7 @@
 
     /* --- Form Elements --- */
     label {
+      font-size: clamp(0.85rem, 1.5vw + 0.4rem, 1rem);
       font-weight: 500;
       margin-bottom: 0.35rem;
       display: block;
@@ -41,7 +41,9 @@
     input,
     textarea {
       width: 100%;
-      padding: 0.75rem;
+      /* Fluid input padding */
+      padding: clamp(0.5rem, 1.5vw, 0.75rem);
+      font-size: clamp(0.9rem, 2vw + 0.4rem, 1rem);
       border: 1px solid #e5e7eb;
       border-radius: 0.5rem;
       background-color: var(--input-bg);
@@ -72,11 +74,16 @@
       justify-content: space-between;
       align-items: center;
     }
+
+    .header-group h2 {
+      font-size: clamp(1.1rem, 2.5vw + 0.5rem, 1.5rem);
+    }
   }
 
   /* --- Buttons --- */
   button {
-    padding: 0.75rem;
+    padding: clamp(0.5rem, 1.5vw, 0.75rem);
+    font-size: clamp(0.9rem, 2vw + 0.4rem, 1rem);
     font-weight: 600;
     background: none;
     border: 1px solid gray;
