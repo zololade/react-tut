@@ -1,6 +1,7 @@
 #root form {
   width: 100%;
   max-width: 500px;
+  animation: mountFadeSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 
   fieldset {
     display: grid;

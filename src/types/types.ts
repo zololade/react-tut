@@ -26,6 +26,7 @@ interface UserData {
   formStateMod: (e: ChangeType) => void;
   visibility: Visibility;
   showBtn: () => void;
+  formState: State;
 }
 
 type Visibility = { exp: boolean; edu: boolean };
@@ -36,7 +37,7 @@ type State = { [k in FormFields]: string };
 //form stuff
 interface FormConfig {
   id: string;
-  name: string;
+  name: FormFields;
   label: string;
   type: string;
   autoComplete?: string;

@@ -1,6 +1,6 @@
-import type { State } from "../types/types";
+import type { UserData } from "../types/types";
 
-function Preview({ formState }: { formState: State }) {
+function Preview({ formState }: Pick<UserData, "formState">) {
   const {
     name,
     email,

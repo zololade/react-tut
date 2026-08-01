@@ -3,7 +3,7 @@ import type { UserData } from "../types/types";
 import { DropDownBtn } from "./form";
 import { FormFields } from "./formFields";
 
-function Experience({ visibility, showBtn, formStateMod }: UserData) {
+function Experience({ visibility, showBtn, formStateMod, formState }: UserData) {
   return (
     <fieldset className="exp" aria-labelledby="experience-heading">
       <div className="header-group">
@@ -14,7 +14,7 @@ function Experience({ visibility, showBtn, formStateMod }: UserData) {
       {visibility.exp ? (
         <>
           <hr />
-          <FormFields fields={EXP_FIELDS} formStateMod={formStateMod} />
+          <FormFields fields={EXP_FIELDS} formStateMod={formStateMod} formState={formState} />
           <label htmlFor="Description">Description: </label>
           <textarea
             id="Description"

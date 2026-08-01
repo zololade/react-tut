@@ -3,7 +3,7 @@ import type { UserData } from "../types/types";
 import { DropDownBtn } from "./form";
 import { FormFields } from "./formFields";
 
-function Education({ visibility, showBtn, formStateMod }: UserData) {
+function Education({ visibility, showBtn, formStateMod, formState }: UserData) {
   return (
     <fieldset className="edu" aria-labelledby="education-heading">
       <div className="header-group">
@@ -14,7 +14,7 @@ function Education({ visibility, showBtn, formStateMod }: UserData) {
       {visibility.edu ? (
         <>
           <hr />
-          <FormFields fields={EDU_FIELDS} formStateMod={formStateMod} />
+          <FormFields fields={EDU_FIELDS} formStateMod={formStateMod} formState={formState} />
         </>
       ) : (
         ""

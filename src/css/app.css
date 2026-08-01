@@ -8,6 +8,7 @@ body {
   /* Stack form and preview on mobile */
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 2rem;
 }
@@ -17,6 +18,59 @@ body {
   #root {
     flex-direction: row;
     align-items: flex-start;
+
     gap: 4rem;
+  }
+}
+
+/* --- Action Panel Container --- */
+.action-panel {
+  /* Match the dimensions and styling of the form fieldSets */
+  width: 100%;
+  max-width: 500px;
+  background-color: var(--bg-color);
+  box-shadow: 0 4px 10px var(--box-shadow);
+  border-radius: 8px;
+  padding: clamp(1.5rem, 4vw, 2rem);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Trigger layout animation on mount */
+  animation: mountFadeSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --- Edit Button --- */
+.btn-edit {
+  width: 100%;
+  padding: clamp(0.6rem, 1.5vw, 0.85rem);
+  font-size: clamp(0.95rem, 2vw + 0.4rem, 1.05rem);
+  font-weight: 600;
+  color: #187ff5;
+  background-color: transparent;
+  border: 2px solid #187ff5;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-edit:hover,
+.btn-edit:focus-visible {
+  background-color: #187ff5;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(24, 127, 245, 0.25);
+  outline: none;
+}
+
+/* --- Node Mounting Keyframes --- */
+@keyframes mountFadeSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

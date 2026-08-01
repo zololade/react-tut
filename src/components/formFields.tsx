@@ -1,12 +1,13 @@
 // import { Fragment } from "react/jsx-runtime";
 
-import type { FormConfig, UserData } from "../types/types";
+import type { FormConfig, State, UserData } from "../types/types";
 type FieldProp = {
   fields: FormConfig[];
   formStateMod: UserData["formStateMod"];
+  formState: State;
 };
 
-function FormFields({ fields, formStateMod }: FieldProp) {
+function FormFields({ fields, formStateMod, formState }: FieldProp) {
   return (
     <>
       {/* Loop through the array to generate labels and inputs dynamically */}
@@ -17,6 +18,7 @@ function FormFields({ fields, formStateMod }: FieldProp) {
             type={field.type}
             id={field.id}
             name={field.name}
+            value={formState[field.name]}
             autoComplete={field.autoComplete ? field.autoComplete : "off"}
             placeholder={field.placeholder}
             required={field.required}
