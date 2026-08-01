@@ -1,78 +1,103 @@
 #root form {
-  /* --- Fieldset Layout --- */
+  width: 100%;
+  max-width: 500px;
+
   fieldset {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem 1rem;
-    width: 400px;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 100%;
     margin: auto;
-    padding: 1rem;
+    padding: 1.5rem;
     background-color: var(--bg-color);
-    box-shadow: 0 0 5px 2px var(--box-shadow);
-    border-radius: 5px;
+    box-shadow: 0 4px 10px var(--box-shadow);
+    border-radius: 8px;
 
     &:not(:first-of-type) {
       margin-top: 1.5rem;
     }
 
-    /* All direct elements span full width by default */
-    & > * {
-      grid-column: span 2;
-    }
+    /* Tablet/Desktop Grid Override */
+    @media (min-width: 600px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem 1rem;
 
-    /* Only half-width field items occupy a single column */
-    .field-item.half-width {
-      grid-column: span 1;
+      & > * {
+        grid-column: span 2;
+      }
+
+      .field-item.half-width {
+        grid-column: span 1;
+      }
     }
 
     /* --- Form Elements --- */
-    label,
-    input,
-    textarea,
-    hr {
+    label {
+      font-weight: 500;
+      margin-bottom: 0.35rem;
       display: block;
-      margin-top: 0.5rem;
     }
 
     input,
     textarea {
       width: 100%;
-      padding: 0.5rem;
-      border: none;
+      padding: 0.75rem;
+      border: 1px solid #e5e7eb;
       border-radius: 0.5rem;
       background-color: var(--input-bg);
+      transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: #187ff5;
+        box-shadow: 0 0 0 3px rgba(24, 127, 245, 0.2);
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
     }
 
     hr {
       border: none;
-      border-bottom: 1px solid #80808038;
+      border-bottom: 1px solid #e5e7eb;
+      margin: 0.5rem 0;
     }
 
     .header-group {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 1rem;
     }
   }
 
   /* --- Buttons --- */
   button {
-    padding: 0.5rem;
+    padding: 0.75rem;
     font-weight: 600;
     background: none;
     border: 1px solid gray;
     border-radius: 5px;
+    cursor: pointer;
 
     &[type="submit"] {
-      margin-top: 1rem;
+      width: 100%;
+      margin-top: 1.5rem;
       color: white;
       background-color: #187ff5;
-      border-color: var(--bg-color);
+      border: none;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: #0d66c2;
+      }
     }
 
     &.dropBtn {
-      padding: 0;
+      padding: 0.25rem;
       border: none;
       transition: transform 200ms ease-in-out;
 

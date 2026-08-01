@@ -1,138 +1,157 @@
 #root {
   .preview-container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
+    width: 100%;
     max-width: 800px;
-  }
-
-  .preview {
-    flex: auto;
-
-    padding: 1rem;
-    max-width: 700px;
-    height: calc(100vh - 2rem);
-    height: calc(100dvh - 2rem);
   }
 
   .cv-paper {
     width: 100%;
-    min-height: 1000px;
-    padding: 2.5rem;
+    height: fit-content;
+    padding: 1.5rem;
     background-color: #ffffff;
     color: #2b2d42;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 
-    /* Header styling */
+    /* Restore generous padding on Tablet+ */
+    @media (min-width: 768px) {
+      padding: 3rem;
+      gap: 2rem;
+    }
+
+    /* Header Styling */
     .cv-header {
-      border-bottom: 2px solid #2b2d42;
-      padding-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border-bottom: 2px solid #1a1a2e;
+      padding-bottom: 1.25rem;
 
       .cv-name {
-        font-size: 2rem;
+        font-size: 1.75rem; /* Shrunk for mobile */
         font-weight: 700;
         letter-spacing: -0.5px;
         color: #1a1a2e;
         text-transform: capitalize;
+
+        @media (min-width: 768px) {
+          font-size: 2.25rem;
+        }
       }
 
       .cv-title {
-        font-size: 1.1rem;
-        color: #4a4e69;
-        margin-top: 0.25rem;
-        font-weight: 500;
-      }
-    }
-
-    /* Two-column layout */
-    .cv-body {
-      display: grid;
-      grid-template-columns: 240px 1fr;
-      gap: 2rem;
-
-      .cv-sidebar {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        border-right: 1px solid #e0e0e0;
-        padding-right: 1.5rem;
-      }
-
-      .cv-main {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-      }
-    }
-
-    /* Shared Section & Entry Typography */
-    .cv-section {
-      .cv-section-title {
-        font-size: 0.95rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        font-size: 1rem;
         color: #0066cc;
-        border-bottom: 1px solid #0066cc22;
-        padding-bottom: 0.25rem;
-        margin-bottom: 0.75rem;
+        font-weight: 500;
+        margin-top: 0.25rem;
       }
 
-      .cv-entry {
+      .cv-contact-list {
         display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
+        flex-direction: column; /* Stack list vertically on mobile */
+        align-items: center;
+        gap: 0.5rem;
+        list-style: none;
+        margin-top: 1rem;
+        font-size: 0.875rem;
+        color: #4a4e69;
 
-        .cv-entry-title {
-          font-size: 1rem;
-          font-weight: 600;
-          color: #1a1a2e;
+        @media (min-width: 600px) {
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 0.5rem 1.25rem;
         }
 
-        .cv-company,
-        .cv-institution {
-          font-size: 0.9rem;
-          color: #333333;
-        }
-
-        .cv-dates,
-        .cv-location {
-          font-size: 0.8rem;
-          color: #6c757d;
-        }
-
-        .cv-description {
-          font-size: 0.875rem;
-          line-height: 1.5;
-          margin-top: 0.5rem;
-          color: #333333;
-          white-space: pre-line;
-        }
-
-        .cv-entry-header {
+        .cv-contact-item {
           display: flex;
-          justify-content: space-between;
-          align-items: baseline;
+          align-items: center;
+
+          @media (min-width: 600px) {
+            &:not(:last-child)::after {
+              content: "•";
+              margin-left: 1.25rem;
+              color: #a0aab2;
+            }
+          }
         }
       }
     }
 
-    /* Contact Address formatting */
-    .cv-contact-info {
-      font-style: normal;
+    /* Single-column Body */
+    .cv-body {
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
-      font-size: 0.85rem;
+      gap: 1.5rem;
 
-      .cv-contact-item {
-        word-break: break-word;
-        .label {
-          font-weight: 600;
-          color: #4a4e69;
+      @media (min-width: 768px) {
+        gap: 1.75rem;
+      }
+
+      .cv-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        .cv-section-title {
+          font-size: 1rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          color: #1a1a2e;
+          border-bottom: 1px solid #e0e0e0;
+          padding-bottom: 0.35rem;
+        }
+
+        .cv-entry {
+          display: flex;
+          flex-direction: column;
+          gap: 0.35rem;
+
+          .cv-entry-header {
+            display: flex;
+            flex-direction: column; /* Stack job title and dates on mobile */
+            gap: 0.25rem;
+            align-items: flex-start;
+
+            @media (min-width: 600px) {
+              flex-direction: row;
+              justify-content: space-between;
+              align-items: flex-start;
+              gap: 1rem;
+            }
+          }
+
+          .cv-entry-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #1a1a2e;
+          }
+
+          .cv-subtitle {
+            font-size: 0.925rem;
+            font-weight: 500;
+            color: #4a4e69;
+          }
+
+          .cv-dates {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #6c757d;
+            white-space: nowrap;
+          }
+
+          .cv-description {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #333333;
+            margin-top: 0.25rem;
+            white-space: pre-line;
+          }
         }
       }
     }
