@@ -1,0 +1,1268 @@
+========================================
+FILE: ./.gitignore
+========================================
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
+========================================
+FILE: ./index.html
+========================================
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_drop_down"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>react-tut</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
+
+========================================
+FILE: ./.oxfmtrc.json
+========================================
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 100,
+  "semi": true,
+  "singleQuote": false,
+  "trailingComma": "all",
+  "sortImports": true,
+  "sortPackageJson": {
+    "sortScripts": true
+  },
+  "ignorePatterns": []
+}
+
+
+========================================
+FILE: ./.oxlintrc.json
+========================================
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "oxc"],
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/only-export-components": [
+      "warn",
+      {
+        "allowConstantExport": true
+      }
+    ]
+  },
+  "options": {
+    "typeAware": true
+  }
+}
+
+
+========================================
+FILE: ./package.json
+========================================
+{
+  "name": "cv-generator",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -b && vite build",
+    "dev": "vite",
+    "lint": "oxlint",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@rolldown/plugin-babel": "^0.2.3",
+    "@types/babel__core": "^7.20.5",
+    "@types/node": "^24.13.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.2",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "oxfmt": "^0.56.0",
+    "oxlint": "^1.69.0",
+    "oxlint-tsgolint": "^0.23.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.1.0"
+  }
+}
+
+
+========================================
+FILE: ./README.md
+========================================
+# React + TypeScript + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+
+## React Compiler
+
+The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+
+Note: This will impact Vite dev & build performances.
+
+## Expanding the Oxlint configuration
+
+If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+
+```json
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "oxc"],
+  "options": {
+    "typeAware": true
+  },
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }]
+  }
+}
+```
+
+See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+
+
+========================================
+FILE: ./secondProject.txt
+========================================
+
+
+========================================
+FILE: ./src/App.tsx
+========================================
+import "./styles.css";
+import { useState, type SubmitEvent } from "react";
+
+import { Bio } from "./components/bio";
+import { Education } from "./components/education";
+import { Experience } from "./components/experience";
+import { Form } from "./components/form";
+import { Preview } from "./components/preview";
+import { SubmitBtn } from "./components/submitBtn";
+import { initialData } from "./data/userData";
+import type { ChangeType, State, Visibility } from "./types/types";
+
+export default function App() {
+  const [visibility, setVisibility] = useState<Visibility>({ edu: false, exp: false });
+  const [formState, setFormState] = useState<State>(initialData);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  function formStateMod(e: ChangeType) {
+    const { name, value } = e.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  }
+
+  function handleSubmit(e: SubmitEvent) {
+    e.preventDefault();
+    setIsSubmitted(true);
+  }
+
+  function updateVisibility(val: Visibility) {
+    setVisibility(val);
+  }
+
+  return (
+    <>
+      {isSubmitted ? (
+        <div className="action-panel">
+          <button onClick={() => setIsSubmitted(false)} className="btn-edit">
+            Edit Details
+          </button>
+        </div>
+      ) : (
+        <Form handleSubmit={handleSubmit}>
+          <Bio formStateMod={formStateMod} formState={formState} />
+          <Education
+            visibility={visibility}
+            showBtn={() => updateVisibility({ ...visibility, edu: !visibility.edu })}
+            formStateMod={formStateMod}
+            formState={formState}
+          />
+          <Experience
+            visibility={visibility}
+            showBtn={() => updateVisibility({ ...visibility, exp: !visibility.exp })}
+            formStateMod={formStateMod}
+            formState={formState}
+          />
+          <SubmitBtn />
+        </Form>
+      )}
+      <Preview formState={formState} />
+    </>
+  );
+}
+
+
+========================================
+FILE: ./src/components/bio.tsx
+========================================
+import { BIO_FIELDS } from "../data/bioFields";
+import type { UserData } from "../types/types";
+import { FormFields } from "./formFields";
+
+function Bio({ formStateMod, formState }: Pick<UserData, "formStateMod" | "formState">) {
+  return (
+    <fieldset className="bio" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Personal details</h2>
+      <hr />
+      <FormFields fields={BIO_FIELDS} formStateMod={formStateMod} formState={formState} />
+    </fieldset>
+  );
+}
+
+export { Bio };
+
+
+========================================
+FILE: ./src/components/education.tsx
+========================================
+import { EDU_FIELDS } from "../data/educationField";
+import type { UserData } from "../types/types";
+import { DropDownBtn } from "./form";
+import { FormFields } from "./formFields";
+
+function Education({ visibility, showBtn, formStateMod, formState }: UserData) {
+  return (
+    <fieldset className="edu" aria-labelledby="education-heading">
+      <div className="header-group">
+        <h2 id="education-heading">Education</h2>
+        <DropDownBtn showBtn={showBtn} />
+      </div>
+
+      {visibility.edu ? (
+        <>
+          <hr />
+          <FormFields fields={EDU_FIELDS} formStateMod={formStateMod} formState={formState} />
+        </>
+      ) : (
+        ""
+      )}
+    </fieldset>
+  );
+}
+
+export { Education };
+
+
+========================================
+FILE: ./src/components/experience.tsx
+========================================
+import { EXP_FIELDS } from "../data/experienceField";
+import type { UserData } from "../types/types";
+import { DropDownBtn } from "./form";
+import { FormFields } from "./formFields";
+
+function Experience({ visibility, showBtn, formStateMod, formState }: UserData) {
+  return (
+    <fieldset className="exp" aria-labelledby="experience-heading">
+      <div className="header-group">
+        <h2 id="experience-heading">Experience</h2>
+        <DropDownBtn showBtn={showBtn} />
+      </div>
+
+      {visibility.exp ? (
+        <>
+          <hr />
+          <FormFields fields={EXP_FIELDS} formStateMod={formStateMod} formState={formState} />
+          <label htmlFor="Description">Description: </label>
+          <textarea
+            id="Description"
+            name="expDesc"
+            placeholder="Enter Description"
+            onChange={formStateMod}
+          ></textarea>
+        </>
+      ) : (
+        ""
+      )}
+    </fieldset>
+  );
+}
+
+export { Experience };
+
+
+========================================
+FILE: ./src/components/formFields.tsx
+========================================
+// import { Fragment } from "react/jsx-runtime";
+
+import type { FormConfig, State, UserData } from "../types/types";
+type FieldProp = {
+  fields: FormConfig[];
+  formStateMod: UserData["formStateMod"];
+  formState: State;
+};
+
+function FormFields({ fields, formStateMod, formState }: FieldProp) {
+  return (
+    <>
+      {/* Loop through the array to generate labels and inputs dynamically */}
+      {fields.map((field) => (
+        <div key={field.id} className={`field-item ${field.halfWidth ? "half-width" : ""}`}>
+          <label htmlFor={field.id}>{field.label}</label>
+          <input
+            type={field.type}
+            id={field.id}
+            name={field.name}
+            value={formState[field.name]}
+            autoComplete={field.autoComplete ? field.autoComplete : "off"}
+            placeholder={field.placeholder}
+            required={field.required}
+            onChange={formStateMod}
+          />
+        </div>
+      ))}
+    </>
+  );
+}
+
+export { FormFields };
+
+
+========================================
+FILE: ./src/components/form.tsx
+========================================
+import { useState } from "react";
+
+import type { FormProp } from "../types/types";
+
+function DropDownBtn({ showBtn }: { showBtn: () => void }) {
+  const [rotate, setRotate] = useState(false);
+  function handleShow() {
+    showBtn();
+    setRotate(!rotate);
+  }
+
+  return (
+    <button type="button" className={rotate ? "dropBtn active" : "dropBtn"} onClick={handleShow}>
+      <span className="material-symbols-outlined">arrow_drop_down</span>
+    </button>
+  );
+}
+
+function Form({ handleSubmit, children }: FormProp) {
+  return (
+    <form action="#" onSubmit={handleSubmit}>
+      <>{children}</>
+    </form>
+  );
+}
+
+export { Form, DropDownBtn };
+
+
+========================================
+FILE: ./src/components/preview.tsx
+========================================
+import type { UserData } from "../types/types";
+
+function Preview({ formState }: Pick<UserData, "formState">) {
+  const {
+    name,
+    email,
+    phone,
+    address_line1,
+    school,
+    degree,
+    startDate,
+    endDate,
+    location,
+    company,
+    position,
+    expStartDate,
+    expEndDate,
+    expLocation,
+    expDesc,
+  } = formState;
+
+  const formatDateRange = (start?: string, end?: string) => {
+    if (!start && !end) return "";
+    if (start && !end) return `${start} – Present`;
+    return `${start} – ${end}`;
+  };
+
+  // Helper to filter out empty contact items for inline rendering
+  const contactItems = [email, phone, address_line1].filter(Boolean);
+  const hasContact = contactItems.length > 0;
+  const hasEducation = Boolean(school || degree);
+  const hasExperience = Boolean(company || position || expDesc);
+
+  return (
+    <section className="preview-container">
+      <article className="cv-paper">
+        {/* Header: Centered / Minimal Header with Inline Contact */}
+        <header className="cv-header">
+          <h1 className="cv-name">{name || "Your Name"}</h1>
+          {position && <p className="cv-title">{position}</p>}
+
+          {hasContact && (
+            <ul className="cv-contact-list">
+              {contactItems.map((item, idx) => (
+                <li key={idx} className="cv-contact-item">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          )}
+        </header>
+
+        {/* Main Body: Stacked Full-Width Sections */}
+        <main className="cv-body">
+          {/* Work Experience */}
+          {hasExperience && (
+            <section className="cv-section">
+              <h2 className="cv-section-title">Work Experience</h2>
+              <div className="cv-entry">
+                <div className="cv-entry-header">
+                  <div>
+                    {position && <h3 className="cv-entry-title">{position}</h3>}
+                    {company && (
+                      <p className="cv-subtitle">
+                        {company}
+                        {expLocation ? ` • ${expLocation}` : ""}
+                      </p>
+                    )}
+                  </div>
+                  {(expStartDate || expEndDate) && (
+                    <span className="cv-dates">{formatDateRange(expStartDate, expEndDate)}</span>
+                  )}
+                </div>
+
+                {expDesc && <p className="cv-description">{expDesc}</p>}
+              </div>
+            </section>
+          )}
+
+          {/* Education */}
+          {hasEducation && (
+            <section className="cv-section">
+              <h2 className="cv-section-title">Education</h2>
+              <div className="cv-entry">
+                <div className="cv-entry-header">
+                  <div>
+                    {degree && <h3 className="cv-entry-title">{degree}</h3>}
+                    {school && (
+                      <p className="cv-subtitle">
+                        {school}
+                        {location ? ` • ${location}` : ""}
+                      </p>
+                    )}
+                  </div>
+                  {(startDate || endDate) && (
+                    <span className="cv-dates">{formatDateRange(startDate, endDate)}</span>
+                  )}
+                </div>
+              </div>
+            </section>
+          )}
+        </main>
+      </article>
+    </section>
+  );
+}
+
+export { Preview };
+
+
+========================================
+FILE: ./src/components/submitBtn.tsx
+========================================
+function SubmitBtn() {
+  return <button type="submit">Submit</button>;
+}
+
+export { SubmitBtn };
+
+
+========================================
+FILE: ./src/css/app.css
+========================================
+body {
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  padding: 1rem;
+}
+
+#root {
+  /* Stack form and preview on mobile */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Switch to side-by-side on desktop */
+@media (min-width: 1024px) {
+  #root {
+    flex-direction: row;
+    align-items: flex-start;
+
+    gap: 4rem;
+  }
+}
+
+/* --- Action Panel Container --- */
+.action-panel {
+  /* Match the dimensions and styling of the form fieldSets */
+  width: 100%;
+  max-width: 500px;
+  background-color: var(--bg-color);
+  box-shadow: 0 4px 10px var(--box-shadow);
+  border-radius: 8px;
+  padding: clamp(1.5rem, 4vw, 2rem);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Trigger layout animation on mount */
+  animation: mountFadeSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --- Edit Button --- */
+.btn-edit {
+  width: 100%;
+  padding: clamp(0.6rem, 1.5vw, 0.85rem);
+  font-size: clamp(0.95rem, 2vw + 0.4rem, 1.05rem);
+  font-weight: 600;
+  color: #187ff5;
+  background-color: transparent;
+  border: 2px solid #187ff5;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-edit:hover,
+.btn-edit:focus-visible {
+  background-color: #187ff5;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(24, 127, 245, 0.25);
+  outline: none;
+}
+
+/* --- Node Mounting Keyframes --- */
+@keyframes mountFadeSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+========================================
+FILE: ./src/css/form.css
+========================================
+#root form {
+  width: 100%;
+  max-width: 500px;
+  animation: mountFadeSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  fieldset {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(0.75rem, 2vw, 1rem);
+    width: 100%;
+    margin: auto;
+    padding: clamp(1rem, 3vw, 1.5rem);
+    background-color: var(--bg-color);
+    box-shadow: 0 4px 10px var(--box-shadow);
+    border-radius: 8px;
+
+    &:not(:first-of-type) {
+      margin-top: clamp(1rem, 3vw, 1.5rem);
+    }
+
+    @media (min-width: 600px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem 1rem;
+
+      & > * {
+        grid-column: span 2;
+      }
+
+      .field-item.half-width {
+        grid-column: span 1;
+      }
+    }
+
+    /* --- Form Elements --- */
+    label {
+      font-size: clamp(0.85rem, 1.5vw + 0.4rem, 1rem);
+      font-weight: 500;
+      margin-bottom: 0.35rem;
+      display: block;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      /* Fluid input padding */
+      padding: clamp(0.5rem, 1.5vw, 0.75rem);
+      font-size: clamp(0.9rem, 2vw + 0.4rem, 1rem);
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      background-color: var(--input-bg);
+      transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: #187ff5;
+        box-shadow: 0 0 0 3px rgba(24, 127, 245, 0.2);
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    hr {
+      border: none;
+      border-bottom: 1px solid #e5e7eb;
+      margin: 0.5rem 0;
+    }
+
+    .header-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-group h2 {
+      font-size: clamp(1.1rem, 2.5vw + 0.5rem, 1.5rem);
+    }
+  }
+
+  /* --- Buttons --- */
+  button {
+    padding: clamp(0.5rem, 1.5vw, 0.75rem);
+    font-size: clamp(0.9rem, 2vw + 0.4rem, 1rem);
+    font-weight: 600;
+    background: none;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &[type="submit"] {
+      width: 100%;
+      margin-top: 1.5rem;
+      color: white;
+      background-color: #187ff5;
+      border: none;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: #0d66c2;
+      }
+    }
+
+    &.dropBtn {
+      padding: 0.25rem;
+      border: none;
+      transition: transform 200ms ease-in-out;
+
+      &.active {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
+
+
+========================================
+FILE: ./src/css/index.css
+========================================
+@import url("./reset.css");
+@import url("./app.css");
+@import url("./form.css");
+@import url("./preview.css");
+
+
+========================================
+FILE: ./src/css/preview.css
+========================================
+#root {
+  .preview-container {
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .cv-paper {
+    width: 100%;
+    height: fit-content;
+    padding: clamp(1.25rem, 4vw, 3rem);
+    background-color: #ffffff;
+    color: #2b2d42;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.25rem, 3vw, 2rem);
+
+    /* Header Styling */
+    .cv-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border-bottom: 2px solid #1a1a2e;
+      padding-bottom: 1.25rem;
+
+      .cv-name {
+        font-size: clamp(1.5rem, 5vw + 0.5rem, 2.5rem);
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        color: #1a1a2e;
+        text-transform: capitalize;
+      }
+
+      .cv-title {
+        font-size: clamp(0.9rem, 2vw + 0.4rem, 1.1rem);
+        color: #0066cc;
+        font-weight: 500;
+        margin-top: 0.25rem;
+      }
+
+      .cv-contact-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        list-style: none;
+        margin-top: 1rem;
+        font-size: clamp(0.75rem, 1.5vw + 0.4rem, 0.875rem);
+        color: #4a4e69;
+
+        @media (min-width: 600px) {
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 0.5rem 1.25rem;
+        }
+
+        .cv-contact-item {
+          display: flex;
+          align-items: center;
+
+          @media (min-width: 600px) {
+            &:not(:last-child)::after {
+              content: "•";
+              margin-left: 1.25rem;
+              color: #a0aab2;
+            }
+          }
+        }
+      }
+    }
+
+    .cv-body {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(1.25rem, 3vw, 1.75rem);
+
+      .cv-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        .cv-section-title {
+          font-size: clamp(0.9rem, 2vw + 0.4rem, 1rem);
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          color: #1a1a2e;
+          border-bottom: 1px solid #e0e0e0;
+          padding-bottom: 0.35rem;
+        }
+
+        .cv-entry {
+          display: flex;
+          flex-direction: column;
+          gap: 0.35rem;
+
+          .cv-entry-header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            align-items: flex-start;
+
+            @media (min-width: 600px) {
+              flex-direction: row;
+              justify-content: space-between;
+              align-items: flex-start;
+              gap: 1rem;
+            }
+          }
+
+          .cv-entry-title {
+            font-size: clamp(0.95rem, 2vw + 0.4rem, 1.1rem);
+            font-weight: 600;
+            color: #1a1a2e;
+          }
+
+          .cv-subtitle {
+            font-size: clamp(0.85rem, 1.5vw + 0.4rem, 0.95rem);
+            font-weight: 500;
+            color: #4a4e69;
+          }
+
+          .cv-dates {
+            font-size: clamp(0.75rem, 1.5vw + 0.4rem, 0.85rem);
+            font-weight: 500;
+            color: #6c757d;
+            white-space: nowrap;
+          }
+
+          .cv-description {
+            font-size: clamp(0.85rem, 1.5vw + 0.4rem, 0.95rem);
+            line-height: 1.6;
+            color: #333333;
+            margin-top: 0.25rem;
+            white-space: pre-line;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+========================================
+FILE: ./src/css/reset.css
+========================================
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  &:not(textarea) {
+    scrollbar-gutter: stable both-edges;
+  }
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+legend,
+fieldset {
+  border: none;
+}
+
+
+========================================
+FILE: ./src/data/bioFields.ts
+========================================
+import type { FormConfig } from "../types/types";
+
+// Create the fields array outside the component to prevent re-creation on render
+const BIO_FIELDS: FormConfig[] = [
+  {
+    id: "name",
+    name: "name",
+    label: "Name: ",
+    type: "text",
+    autoComplete: "name",
+    placeholder: "First and Last name",
+    required: true,
+  },
+  {
+    id: "email",
+    name: "email",
+    label: "Email: ",
+    type: "email",
+    autoComplete: "email",
+    placeholder: "Enter Email",
+    required: true,
+  },
+  {
+    id: "phone",
+    name: "phone",
+    label: "Phone: ",
+    type: "tel",
+    autoComplete: "phone",
+    placeholder: "Enter Phone number",
+    required: true,
+  },
+  {
+    id: "address-line1",
+    name: "address_line1",
+    label: "Street Address: ",
+    type: "text",
+    autoComplete: "address-line1",
+    placeholder: "123 Main St",
+    required: true,
+  },
+];
+
+export { BIO_FIELDS };
+
+
+========================================
+FILE: ./src/data/educationField.ts
+========================================
+import type { FormConfig } from "../types/types";
+
+// Create the fields array outside the component to prevent re-creation on render
+const EDU_FIELDS: FormConfig[] = [
+  {
+    id: "school",
+    name: "school",
+    label: "School: ",
+    type: "text",
+    placeholder: "Enter School",
+  },
+  {
+    id: "degree",
+    name: "degree",
+    label: "Degree: ",
+    type: "text",
+    placeholder: "Enter Degree",
+  },
+  {
+    id: "start-date",
+    name: "startDate",
+    label: "Start Date: ",
+    type: "date",
+    placeholder: "Start Date",
+    halfWidth: true,
+  },
+  {
+    id: "end-date",
+    name: "endDate",
+    label: "End Date: ",
+    type: "date",
+    placeholder: "End Date",
+    halfWidth: true,
+  },
+  {
+    id: "location",
+    name: "location",
+    label: "Location: ",
+    type: "text",
+    placeholder: "Delicious, City",
+  },
+];
+
+export { EDU_FIELDS };
+
+
+========================================
+FILE: ./src/data/experienceField.ts
+========================================
+import type { FormConfig } from "../types/types";
+
+// Create the fields array outside the component to prevent re-creation on render
+const EXP_FIELDS: FormConfig[] = [
+  {
+    id: "company",
+    name: "company",
+    label: "Company Name: ",
+    type: "text",
+    placeholder: "Enter Company Name",
+  },
+  {
+    id: "position",
+    name: "position",
+    label: "Position Title: ",
+    type: "text",
+    placeholder: "Enter Position Title",
+  },
+  {
+    id: "start-date",
+    name: "expStartDate",
+    label: "Start Date: ",
+    type: "date",
+    placeholder: "Start Date",
+    halfWidth: true,
+  },
+  {
+    id: "end-date",
+    name: "expEndDate",
+    label: "End Date: ",
+    type: "date",
+    placeholder: "End Date",
+    halfWidth: true,
+  },
+  {
+    id: "location",
+    name: "expLocation",
+    label: "Location: ",
+    type: "text",
+    placeholder: "Delicious, City",
+  },
+];
+
+export { EXP_FIELDS };
+
+
+========================================
+FILE: ./src/data/userData.ts
+========================================
+let initialData = {
+  name: "",
+  email: "",
+  phone: "",
+  address_line1: "",
+  school: "",
+  degree: "",
+  startDate: "",
+  endDate: "",
+  location: "",
+  company: "",
+  position: "",
+  expStartDate: "",
+  expEndDate: "",
+  expLocation: "",
+  expDesc: "",
+};
+
+export { initialData };
+
+
+========================================
+FILE: ./src/main.tsx
+========================================
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+
+import App from "./App.tsx";
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);
+
+
+========================================
+FILE: ./src/styles.css
+========================================
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("./css/index.css");
+
+:root {
+  font-family: "Noto Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+
+  --bg-color: #ffffff;
+  --text-color: #1c1c1e;
+  --box-shadow: #cccdcd73;
+  --input-bg: #f3f4f6;
+}
+
+
+========================================
+FILE: ./src/types/types.ts
+========================================
+import type { SubmitEventHandler, ChangeEvent, ReactNode } from "react";
+
+type FormFields =
+  | "name"
+  | "email"
+  | "phone"
+  | "address_line1"
+  | "school"
+  | "degree"
+  | "startDate"
+  | "endDate"
+  | "location"
+  | "company"
+  | "position"
+  | "expStartDate"
+  | "expEndDate"
+  | "expLocation"
+  | "expDesc";
+
+interface FormProp {
+  handleSubmit: SubmitEventHandler;
+  children: ReactNode;
+}
+
+interface UserData {
+  formStateMod: (e: ChangeType) => void;
+  visibility: Visibility;
+  showBtn: () => void;
+  formState: State;
+}
+
+type Visibility = { exp: boolean; edu: boolean };
+type ChangeType = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
+
+type State = { [k in FormFields]: string };
+
+//form stuff
+interface FormConfig {
+  id: string;
+  name: FormFields;
+  label: string;
+  type: string;
+  autoComplete?: string;
+  placeholder: string;
+  required?: boolean;
+  halfWidth?: boolean;
+}
+
+export type { FormProp, UserData, Visibility, State, ChangeType, FormConfig };
+
+
+========================================
+FILE: ./tsconfig.app.json
+========================================
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "es2023",
+    "lib": ["ES2023", "DOM"],
+    "module": "esnext",
+    "types": ["vite/client"],
+    "skipLibCheck": true,
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    /* Linting */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"]
+}
+
+
+========================================
+FILE: ./tsconfig.json
+========================================
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}
+
+
+========================================
+FILE: ./tsconfig.node.json
+========================================
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "es2023",
+    "lib": ["ES2023"],
+    "types": ["node"],
+    "skipLibCheck": true,
+    /* Bundler mode */
+    "module": "nodenext",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    /* Linting */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["vite.config.ts"]
+}
+
+
+========================================
+FILE: ./Untitled Document 1
+========================================
+    {/* <div className="date-group">
+            <div className="date-item">
+              <label htmlFor="start-date">Start Date: </label>
+              <input
+                type="date"
+                id="start-date"
+                name="startDate"
+                placeholder="Start Date"
+                onChange={formStateMod}
+              />
+            </div>
+
+            <div className="date-item">
+              <label htmlFor="end-date">End Date: </label>
+              <input
+                type="date"
+                id="end-date"
+                name="endDate"
+                placeholder="End Date"
+                onChange={formStateMod}
+              />
+            </div>
+          </div> */}
+
+
+========================================
+FILE: ./vite.config.ts
+========================================
+import babel from "@rolldown/plugin-babel";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react(), babel({ presets: [reactCompilerPreset()] })],
+});
+
+

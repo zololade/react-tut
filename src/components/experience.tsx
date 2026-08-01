@@ -21,6 +21,7 @@ function Experience({ visibility, showBtn, formStateMod, formState }: UserData) 
             name="expDesc"
             placeholder="Enter Description"
             onChange={formStateMod}
+            value={formState.expDesc}
           ></textarea>
         </>
       ) : (
